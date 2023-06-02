@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 import "./App.scss";
 import axios from "axios";
+import SearchWord from "./SearchWord";
+import Loading from "./Loading";
+import DisplayWord from "./DisplayWord";
 
-const url = "https://api.dictionaryapi.dev/api/v2/entries/en/cat";
 const App = () => {
   const [data, setData] = useState([]);
+  const [userInput, setUserInput] = useState("keyboard");
   const [loading, setLoading] = useState(true);
+  const url = `https://api.dictionaryapi.dev/api/v2/entries/en/${userInput}`;
 
   //fetch data
   const fetchData = async () => {
@@ -18,20 +22,32 @@ const App = () => {
     }
   };
 
+  //display data on page load
   useEffect(() => {
     fetchData();
   }, []);
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  const { word, phonetic, meanings } = data;
+  //fetch data on user enter keypress
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      fetchData();
+    }
+  };
 
   return (
-    <div className="App">
-      <p>{word}</p>
-      <p>{phonetic}</p>
+    <div>
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <SearchWord
+            userInput={userInput}
+            setUserInput={setUserInput}
+            handleKeyPress={handleKeyPress}
+          />
+          <DisplayWord data={data} />
+        </>
+      )}
     </div>
   );
 };
