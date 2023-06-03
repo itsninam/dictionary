@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import "./App.scss";
 import axios from "axios";
-import SearchWord from "./SearchWord";
-import Loading from "./Loading";
-import DisplayWord from "./DisplayWord";
+import SearchWord from "./Components/SearchWord";
+import Loading from "./Components/Loading";
+import DisplayWord from "./Components/DisplayWord";
+import Header from "./Components/Header";
 
 const App = () => {
   const [data, setData] = useState([]);
@@ -35,11 +36,12 @@ const App = () => {
   };
 
   return (
-    <div>
+    <div className="wrapper">
       {loading ? (
         <Loading />
       ) : (
         <>
+          <Header />
           <SearchWord
             userInput={userInput}
             setUserInput={setUserInput}
