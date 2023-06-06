@@ -5,12 +5,20 @@ import SearchWord from "./Components/SearchWord";
 import Loading from "./Components/Loading";
 import DisplayWord from "./Components/DisplayWord";
 import Header from "./Components/Header";
+import SavedWords from "./Components/SavedWords";
 
 const App = () => {
   const [data, setData] = useState([]);
   const [userInput, setUserInput] = useState("keyboard");
   const [loading, setLoading] = useState(true);
   const url = `https://api.dictionaryapi.dev/api/v2/entries/en/${userInput}`;
+
+  //get item from local storage
+  const [savedWords, setSavedWords] = useState(() => {
+    const saved = localStorage.getItem("savedWords");
+    const initialValue = JSON.parse(saved);
+    return initialValue || [];
+  });
 
   //fetch data
   const fetchData = async () => {
@@ -26,11 +34,15 @@ const App = () => {
   //display data on page load
   useEffect(() => {
     fetchData();
-  }, []);
+
+    //set item in local storage
+    localStorage.setItem("savedWords", JSON.stringify(savedWords));
+  }, [savedWords]);
 
   //fetch data on user enter keypress
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
+      event.preventDefault();
       fetchData();
     }
   };
@@ -41,13 +53,18 @@ const App = () => {
         <Loading />
       ) : (
         <>
-          <Header />
+          <Header savedWords={savedWords} />
           <SearchWord
             userInput={userInput}
             setUserInput={setUserInput}
             handleKeyPress={handleKeyPress}
           />
-          <DisplayWord data={data} />
+          <DisplayWord
+            data={data}
+            savedWords={savedWords}
+            setSavedWords={setSavedWords}
+          />
+          <SavedWords savedWords={savedWords} />
         </>
       )}
     </div>

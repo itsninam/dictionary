@@ -3,7 +3,7 @@ import { faBook } from "@fortawesome/free-solid-svg-icons";
 import { faMoon } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 
-const Header = () => {
+const Header = ({ savedWords }) => {
   const [selectedFont, setSelectedFont] = useState("sans-serif-font");
   const fontChoices = ["sans-serif-font", "serif-font", "mono-font"];
 
@@ -21,7 +21,10 @@ const Header = () => {
 
   return (
     <header>
-      <FontAwesomeIcon icon={faBook} className="dictionary-icon" />
+      <div className="dictionary-container">
+        <FontAwesomeIcon icon={faBook} className="dictionary-icon" />
+        {savedWords.length > 0 && <span>{savedWords.length}</span>}
+      </div>
       <div className="right-items-container">
         <form action="">
           <label htmlFor="fontSelect" className="sr-only">
