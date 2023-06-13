@@ -6,6 +6,7 @@ import Loading from "./Components/Loading";
 import DisplayWord from "./Components/DisplayWord";
 import Header from "./Components/Header";
 import SavedWords from "./Components/SavedWords";
+import { Routes, Route } from "react-router-dom";
 
 const App = () => {
   const [data, setData] = useState([]);
@@ -53,7 +54,7 @@ const App = () => {
         <Loading />
       ) : (
         <>
-          <Header savedWords={savedWords} />
+          {/* <Header savedWords={savedWords} />
           <SearchWord
             userInput={userInput}
             setUserInput={setUserInput}
@@ -63,8 +64,36 @@ const App = () => {
             data={data}
             savedWords={savedWords}
             setSavedWords={setSavedWords}
-          />
-          <SavedWords savedWords={savedWords} setSavedWords={setSavedWords} />
+          /> */}
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  <Header savedWords={savedWords} />
+                  <SearchWord
+                    userInput={userInput}
+                    setUserInput={setUserInput}
+                    handleKeyPress={handleKeyPress}
+                  />
+                  <DisplayWord
+                    data={data}
+                    savedWords={savedWords}
+                    setSavedWords={setSavedWords}
+                  />
+                </>
+              }
+            />
+            <Route
+              path="/savedWords"
+              element={
+                <SavedWords
+                  savedWords={savedWords}
+                  setSavedWords={setSavedWords}
+                />
+              }
+            />
+          </Routes>
         </>
       )}
     </div>

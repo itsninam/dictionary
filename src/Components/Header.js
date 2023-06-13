@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBook } from "@fortawesome/free-solid-svg-icons";
 import { faMoon } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Header = ({ savedWords }) => {
   const [selectedFont, setSelectedFont] = useState("sans-serif-font");
@@ -22,8 +23,10 @@ const Header = ({ savedWords }) => {
   return (
     <header>
       <div className="dictionary-container">
-        <FontAwesomeIcon icon={faBook} className="dictionary-icon" />
-        {savedWords.length > 0 && <span>{savedWords.length}</span>}
+        <Link to="/savedWords">
+          <FontAwesomeIcon icon={faBook} className="dictionary-icon" />
+          {savedWords.length > 0 && <span>{savedWords.length}</span>}
+        </Link>
       </div>
       <div className="right-items-container">
         <form action="">
