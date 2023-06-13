@@ -64,7 +64,7 @@ const App = () => {
             savedWords={savedWords}
             setSavedWords={setSavedWords}
           />
-          <SavedWords savedWords={savedWords} />
+          <SavedWords savedWords={savedWords} setSavedWords={setSavedWords} />
         </>
       )}
     </div>

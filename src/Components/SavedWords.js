@@ -1,12 +1,26 @@
-const SavedWords = ({ savedWords }) => {
+const SavedWords = ({ savedWords, setSavedWords }) => {
+  const handleRemoveWord = (id) => {
+    const selectedWordToRemove = savedWords.filter((word) => word.id !== id);
+    setSavedWords(selectedWordToRemove);
+  };
+
   return (
     <>
-      {savedWords.length > 0 && (
-        <p>
+      {savedWords.length > 0 ? (
+        <>
           {savedWords.map((word) => {
-            return <p>{word.word}</p>;
+            return (
+              <div key={word.id} className="saved-word-container">
+                <p>{word.word}</p>
+                <button onClick={() => handleRemoveWord(word.id)}>
+                  remove
+                </button>
+              </div>
+            );
           })}
-        </p>
+        </>
+      ) : (
+        <p>No items in list</p>
       )}
     </>
   );

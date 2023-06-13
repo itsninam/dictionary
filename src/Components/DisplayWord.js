@@ -7,6 +7,8 @@ const DisplayWord = ({ data, savedWords, setSavedWords }) => {
     if (savedWords.find((word) => word.word === data.word)) {
       console.log("already added!");
     } else {
+      //create an id
+      data.id = Math.floor(Math.random() * 100);
       setSavedWords([...savedWords, data]);
     }
   };
