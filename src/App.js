@@ -71,16 +71,18 @@ const App = () => {
               element={
                 <>
                   <Header savedWords={savedWords} />
-                  <SearchWord
-                    userInput={userInput}
-                    setUserInput={setUserInput}
-                    handleKeyPress={handleKeyPress}
-                  />
-                  <DisplayWord
-                    data={data}
-                    savedWords={savedWords}
-                    setSavedWords={setSavedWords}
-                  />
+                  <main>
+                    <SearchWord
+                      userInput={userInput}
+                      setUserInput={setUserInput}
+                      handleKeyPress={handleKeyPress}
+                    />
+                    <DisplayWord
+                      data={data}
+                      savedWords={savedWords}
+                      setSavedWords={setSavedWords}
+                    />
+                  </main>
                 </>
               }
             />
