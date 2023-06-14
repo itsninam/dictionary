@@ -1,7 +1,10 @@
 .word-content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+
+  .flex-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 
   .word {
     font-size: 3.5rem;
@@ -13,6 +16,8 @@
     color: $accentColour;
   }
 
+
+
   .play-icon {
     font-size: 60px;
     color: $accentColour;
@@ -23,5 +28,42 @@
     &:hover {
       opacity: 1;
     }
+  }
+}
+
+.meanings-container {
+  .noun {
+    position: relative;
+    font-style: italic;
+    font-weight: bolder;
+
+    &:after {
+      content: '';
+      position: absolute;
+      width: 90%;
+      border-top: 1px solid $highEmphasis;
+      top: 10px;
+      left: 65px;
+      opacity: 0.2;
+    }
+  }
+
+  .example {
+    display: block;
+    opacity: 0.4;
+    margin-top: 8px;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  ul li::before {
+    content: "\2022";
+    color: $accentColour;
+    font-weight: bold;
+    display: inline-block;
+    width: 1.5rem;
+    margin-left: -1em;
   }
 }

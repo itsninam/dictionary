@@ -1,8 +1,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlay } from "@fortawesome/free-solid-svg-icons";
+import Meanings from "./Meanings";
 
 const DisplayWord = ({ data, savedWords, setSavedWords }) => {
   const { word, phonetic, meanings, phonetics } = data;
+
+  console.log(data);
 
   const handleSaveWord = () => {
     //if word is already present in the array, alert the user
@@ -26,31 +29,34 @@ const DisplayWord = ({ data, savedWords, setSavedWords }) => {
   };
 
   return (
-    <section className="word-content">
-      <div className="word-container">
-        <p className="word">{word}</p>
-        <p className="phonetic">{phonetic}</p>
-      </div>
-
-      {audio && (
-        <>
-          <FontAwesomeIcon
-            icon={faCirclePlay}
-            onClick={handlePressPlay}
-            aria-hidden="true"
-            className="play-icon"
-          />
-          <audio
-            controls
-            key={Math.floor(Math.random() * 100)}
-            className="sr-only"
-          >
-            <source src={audio.audio} type="audio/mpeg" />
-          </audio>
-        </>
-      )}
-      {/* <button onClick={handleSaveWord}>Add to list</button> */}
-    </section>
+    <>
+      <section className="word-content">
+        <div className="flex-container">
+          <div className="word-container">
+            <p className="word">{word}</p>
+            <p className="phonetic">{phonetic}</p>
+          </div>
+          {audio && (
+            <>
+              <FontAwesomeIcon
+                icon={faCirclePlay}
+                onClick={handlePressPlay}
+                aria-hidden="true"
+                className="play-icon"
+              />
+              <audio
+                controls
+                key={Math.floor(Math.random() * 100)}
+                className="sr-only"
+              >
+                <source src={audio.audio} type="audio/mpeg" />
+              </audio>
+            </>
+          )}
+        </div>
+      </section>
+      <Meanings meanings={meanings} />
+    </>
   );
 };
 
