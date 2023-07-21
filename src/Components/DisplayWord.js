@@ -5,8 +5,6 @@ import Meanings from "./Meanings";
 const DisplayWord = ({ data, savedWords, setSavedWords }) => {
   const { word, phonetic, meanings, phonetics } = data;
 
-  console.log(data);
-
   const handleSaveWord = () => {
     //if word is already present in the array, alert the user
     //otherwise add it to the array
@@ -33,7 +31,9 @@ const DisplayWord = ({ data, savedWords, setSavedWords }) => {
       <section className="word-content">
         <div className="flex-container">
           <div className="word-container">
-            <p className="word">{word}</p>
+            <p className="word" onClick={handleSaveWord}>
+              {word}
+            </p>
             <p className="phonetic">{phonetic}</p>
           </div>
           {audio && (

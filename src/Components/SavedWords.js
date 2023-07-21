@@ -1,8 +1,21 @@
-const SavedWords = ({ savedWords, setSavedWords }) => {
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
+
+const SavedWords = ({
+  savedWords,
+  setSavedWords,
+  userInput,
+  setUserInput,
+  fetchData,
+}) => {
   const handleRemoveWord = (id) => {
     const selectedWordToRemove = savedWords.filter((word) => word.id !== id);
     setSavedWords(selectedWordToRemove);
   };
+
+  useEffect(() => {
+    fetchData();
+  }, [userInput]);
 
   return (
     <>
@@ -11,7 +24,9 @@ const SavedWords = ({ savedWords, setSavedWords }) => {
           {savedWords.map((word) => {
             return (
               <div key={word.id} className="saved-word-container">
-                <p>{word.word}</p>
+                <Link to="/">
+                  <p onClick={() => setUserInput(word.word)}>{word.word}</p>
+                </Link>
                 <button onClick={() => handleRemoveWord(word.id)}>
                   remove
                 </button>

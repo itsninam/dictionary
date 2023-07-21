@@ -92,6 +92,9 @@ const App = () => {
                 <SavedWords
                   savedWords={savedWords}
                   setSavedWords={setSavedWords}
+                  userInput={userInput}
+                  setUserInput={setUserInput}
+                  fetchData={fetchData}
                 />
               }
             />
