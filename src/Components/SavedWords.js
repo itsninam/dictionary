@@ -1,5 +1,6 @@
-import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+
+import SavedWord from "./SavedWord";
 
 const SavedWords = ({
   savedWords,
@@ -20,20 +21,18 @@ const SavedWords = ({
   return (
     <>
       {savedWords.length > 0 ? (
-        <>
+        <ul>
           {savedWords.map((word) => {
             return (
-              <div key={word.id} className="saved-word-container">
-                <Link to="/">
-                  <p onClick={() => setUserInput(word.word)}>{word.word}</p>
-                </Link>
-                <button onClick={() => handleRemoveWord(word.id)}>
-                  remove
-                </button>
-              </div>
+              <SavedWord
+                word={word}
+                setUserInput={setUserInput}
+                handleRemoveWord={handleRemoveWord}
+                key={word.id}
+              />
             );
           })}
-        </>
+        </ul>
       ) : (
         <p>No items in list</p>
       )}
